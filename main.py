@@ -75,44 +75,45 @@ flags.DEFINE_float("flow_diff_threshold", 4.0,
 
 flags.DEFINE_string('eval_pose', '', 'pose seq to evaluate')
 
-FLAGS.num_scales = 4
 opt = FLAGS
+d_opt = {}
+
 
 
 def main(unused_argv):
     if FLAGS.trace == "":
         raise Exception("OUT_DIR must be specified")
 
-    print 'Constructing models and inputs.'
+    print('Constructing models and inputs.')
 
     if FLAGS.mode == "depthflow":  # stage 3: train depth and flow together
         Model = Model_depthflow
         Model_eval = Model_eval_depthflow
 
-        opt.eval_flow = True
-        opt.eval_depth = True
-        opt.eval_mask = True
+        d_opt['eval_flow'] = True
+        d_opt['eval_depth'] = True
+        d_opt['eval_mask'] = True
     elif FLAGS.mode == "depth":  # stage 2: train depth
         Model = Model_depth
         Model_eval = Model_eval_depth
 
-        opt.eval_flow = True
-        opt.eval_depth = True
-        opt.eval_mask = False
+        d_opt['eval_flow'] = True
+        d_opt['eval_depth'] = True
+        d_opt['eval_mask'] = False
     elif FLAGS.mode == "flow":  # stage 1: train flow
         Model = Model_flow
         Model_eval = Model_eval_flow
 
-        opt.eval_flow = True
-        opt.eval_depth = False
-        opt.eval_mask = False
+        d_opt['eval_flow'] = True
+        d_opt['eval_depth'] = False
+        d_opt['eval_mask'] = False
     elif FLAGS.mode == "stereo":
         Model = Model_stereo
         Model_eval = Model_eval_stereo
 
-        opt.eval_flow = False
-        opt.eval_depth = True
-        opt.eval_mask = False
+        d_opt['eval_flow'] = False
+        d_opt['eval_depth'] = True
+        d_opt['eval_mask'] = False
     else:
         raise "mode must be one of flow, depth, depthflow or stereo"
 
@@ -142,7 +143,7 @@ def main(unused_argv):
                                           tf.get_variable_scope().name)
 
         with tf.variable_scope(tf.get_variable_scope()) as vs:
-            for i in xrange(FLAGS.num_gpus):
+            for i in range(FLAGS.num_gpus):
                 with tf.device('/gpu:%d' % i):
                     if i == FLAGS.num_gpus - 1:
                         scopename = "model"
@@ -263,7 +264,7 @@ def main(unused_argv):
         start_itr = global_step.eval(session=sess)
         tf.train.start_queue_runners(sess)
 
-        if opt.eval_flow:
+        if d_opt['eval_flow']:
             gt_flows_2012, noc_masks_2012 = load_gt_flow_kitti("kitti_2012")
             gt_flows_2015, noc_masks_2015 = load_gt_flow_kitti("kitti")
             gt_masks = load_gt_mask()

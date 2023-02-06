@@ -42,6 +42,7 @@ def transformerFwd(U,
     """
 
     def _repeat(x, n_repeats):
+        n_repeats = int(n_repeats)
         with tf.variable_scope('_repeat'):
             rep = tf.transpose(
                 tf.expand_dims(
@@ -156,6 +157,7 @@ def transformerFwd(U,
             return output
 
     def _meshgrid(height, width):
+        height,width = int(height),int(width)
         with tf.variable_scope('_meshgrid'):
             # This should be equivalent to:
             #  x_t, y_t = np.meshgrid(np.linspace(-1, 1, width),
@@ -202,7 +204,7 @@ def transformerFwd(U,
 
             output = tf.reshape(
                 input_transformed,
-                tf.stack([num_batch, out_height, out_width, num_channels]))
+                tf.stack([num_batch, int(out_height), int(out_width), num_channels]))
             return output
 
     with tf.variable_scope(name):

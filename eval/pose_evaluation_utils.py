@@ -4,7 +4,6 @@
 import math, re, os
 import numpy as np
 import scipy.misc as sm
-from evaluate_flow import get_scaled_intrinsic_matrix
 
 from tensorflow.python.platform import flags
 opt = flags.FLAGS
@@ -513,3 +512,13 @@ def dump_pose_seq_TUM(out_file, poses, times):
             qw, qx, qy, qz = rot2quat(rot)
             f.write('%f %f %f %f %f %f %f %f\n' %
                     (times[p], tx, ty, tz, qx, qy, qz, qw))
+
+def get_scaled_intrinsic_matrix(calib_file, zoom_x, zoom_y):
+    intrinsics = load_intrinsics_raw(calib_file)
+    intrinsics = scale_intrinsics(intrinsics, zoom_x, zoom_y)
+
+    intrinsics[0, 1] = 0.0
+    intrinsics[1, 0] = 0.0
+    intrinsics[2, 0] = 0.0
+    intrinsics[2, 1] = 0.0
+    return intrinsics

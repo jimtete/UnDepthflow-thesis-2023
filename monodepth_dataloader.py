@@ -187,8 +187,11 @@ class MonodepthDataloader(object):
         #         left_image, right_image, next_left_image, next_right_image = tf.split(im_batch[0,:,:,:], num_or_size_splits=4, axis=2)
         #         raw_cam_mat = raw_cam_mat_batch[0,:,:]
 
+
+        # TODO: for later opt.numscales
+
         proj_cam2pix, proj_pix2cam = get_multi_scale_intrinsics(raw_cam_mat,
-                                                                opt.num_scales)
+                                                                1)
 
         # capacity = min_after_dequeue + (num_threads + a small safety margin) * batch_size
         min_after_dequeue = 2048

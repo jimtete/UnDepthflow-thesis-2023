@@ -14,7 +14,7 @@
 # ==============================================================================
 import tensorflow as tf
 
-import tensorflow.contrib.slim as slim
+import tf_slim as slim
 from optical_flow_warp_old import transformer_old
 
 

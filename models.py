@@ -153,7 +153,9 @@ class Model_flow(object):
         exp_mask_stack_all = []
         flyout_map_all = []
 
-        for s in range(opt.num_scales):
+        # TODO: change num scales
+
+        for s in range(1):
             # Scale the source and target images for computing loss at the 
             # according scale.
             curr_tgt_image = tf.image.resize_area(
@@ -228,8 +230,9 @@ class Model_eval_flow(object):
                 name='raw_input_2r')
             input_intrinsic = tf.placeholder(tf.float32, [3, 3])
 
-            cam2pix, pix2cam = get_multi_scale_intrinsics(input_intrinsic,
-                                                          opt.num_scales)
+            # TODO : NUM SCALES
+
+            cam2pix, pix2cam = get_multi_scale_intrinsics(input_intrinsic,1)
             cam2pix = tf.expand_dims(cam2pix, axis=0)
             pix2cam = tf.expand_dims(pix2cam, axis=0)
 

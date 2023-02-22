@@ -37,8 +37,10 @@ def eval_disp_avg(pred_disps, path, disp_num=None, moving_masks=None):
 
         H, W = gt_disp.shape[0:2]
 
+        #TODO Changed pred_disp in resize to np.array(pred_disp)
+
         pred_disp = W * cv2.resize(
-            pred_disp, (W, H), interpolation=cv2.INTER_LINEAR)
+            np.array(pred_disp), (W, H), interpolation=cv2.INTER_LINEAR)
 
         epe_map = np.abs(pred_disp - gt_disp)
         error += np.sum(epe_map * valid_mask) / np.sum(valid_mask)

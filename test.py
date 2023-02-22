@@ -99,8 +99,10 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 test_result_mask.append(np.squeeze(pred_mask))
                 test_image1.append(img1_orig)
 
+            # TODO: Changing eval depth into a hardoded value
+            # Old line :             if opt.eval_depth and eval_data == "kitti_2015":
             ## depth evaluation
-            if opt.eval_depth and eval_data == "kitti_2015":
+            if eval_data == "kitti_2015":
                 print("Evaluate depth at iter [" + str(itr) + "] " + eval_data)
                 gt_depths, pred_depths, gt_disparities, pred_disp_resized = load_depths(
                     test_result_disp, gt_dir, eval_occ=True)
@@ -131,7 +133,10 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                     sys.stderr.write("disp2 err 2015 is \n")
                     sys.stderr.write(disp_err + "\n")
 
-            if opt.eval_depth and eval_data == "kitti_2012":
+            # TODO also here:
+            # old line:             if opt.eval_depth and eval_data == "kitti_2012":
+
+            if eval_data == "kitti_2012":
                 disp_err = eval_disp_avg(test_result_disp, gt_dir)
                 sys.stderr.write("disp err 2012 is \n")
                 sys.stderr.write(disp_err + "\n")

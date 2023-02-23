@@ -180,8 +180,11 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 sys.stderr.write("epe 2015 optical is \n")
                 sys.stderr.write(epe + "\n")
 
+            # TODO also here:
+            # if opt.eval_mask and eval_data == "kitti_2015":
+            
             # mask evaluation
-            if opt.eval_mask and eval_data == "kitti_2015":
+            if  eval_data == "kitti_2015":
                 mask_err = eval_mask(test_result_mask, gt_masks, opt)
                 sys.stderr.write("mask_err is %s \n" % str(mask_err))
 

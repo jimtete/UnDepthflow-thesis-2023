@@ -141,8 +141,11 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 sys.stderr.write("disp err 2012 is \n")
                 sys.stderr.write(disp_err + "\n")
 
+            # TODO also here:
+            # old line: if opt.eval_flow and eval_data == "kitti_2012":
+            
             # flow evaluation
-            if opt.eval_flow and eval_data == "kitti_2012":
+            if eval_data == "kitti_2012":
                 if opt.mode in ["depth", "depthflow"]:
                     epe = eval_flow_avg(gt_flows_2012, noc_masks_2012,
                                         test_result_flow_rigid, opt)
@@ -154,7 +157,10 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 sys.stderr.write("epe 2012 optical is \n")
                 sys.stderr.write(epe + "\n")
 
-            if opt.eval_flow and eval_data == "kitti_2015":
+            # TODO also here:
+            # old line: if opt.eval_flow and eval_data == "kitti_2015":
+
+            if eval_data == "kitti_2015":
                 if opt.mode in ["depth", "depthflow"]:
                     epe = eval_flow_avg(
                         gt_flows_2015,

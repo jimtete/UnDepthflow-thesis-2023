@@ -105,7 +105,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
             if eval_data == "kitti_2015":
                 print("Evaluate depth at iter [" + str(itr) + "] " + eval_data)
                 gt_depths, pred_depths, gt_disparities, pred_disp_resized = load_depths(
-                    test_result_disp, gt_dir, eval_occ=True)
+                    test_result_disp, gt_dir)
                 abs_rel, sq_rel, rms, log_rms, a1, a2, a3, d1_all = eval_depth(
                     gt_depths, pred_depths, gt_disparities, pred_disp_resized)
                 sys.stderr.write(

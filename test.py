@@ -189,7 +189,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 sys.stderr.write("mask_err is %s \n" % str(mask_err))
 
 def load_depths(gt, pred):
-    thresh = np.maximum((gt / pred), (pred / gt))
+    thresh = np.maximum(np.array(gt / pred), np.array(pred / gt))
     a1 = (thresh < 1.25).mean()
     a2 = (thresh < 1.25**2).mean()
     a3 = (thresh < 1.25**3).mean()

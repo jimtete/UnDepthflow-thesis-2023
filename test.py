@@ -233,6 +233,12 @@ def convert_disps_to_depths_kitti(gt_disparities, pred_disparities):
         pred_depths.append(pred_depth)
     return gt_depths, pred_depths, pred_disparities_resized
 
+width_to_focal = dict()
+width_to_focal[1242] = 721.5377
+width_to_focal[1241] = 718.856
+width_to_focal[1224] = 707.0493
+width_to_focal[1238] = 718.3351
+
 def compute_errors(gt, pred):
     thresh = np.maximum((gt / pred), (pred / gt))
     a1 = (thresh < 1.25).mean()

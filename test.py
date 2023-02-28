@@ -195,6 +195,19 @@ def load_depths(pred_disp_org, gt_path, eval_occ):
 
     return gt_depths, pred_depths, gt_disparities, pred_disparities_resized
 
+def load_gt_disp_kitti(path, eval_occ):
+    gt_disparities = []
+    for i in range(200):
+        if eval_occ:
+            disp = sm.imread(
+                path + "/disp_occ_0/" + str(i).zfill(6) + "_10.png", -1)
+        else:
+            disp = sm.imread(
+                path + "/disp_noc_0/" + str(i).zfill(6) + "_10.png", -1)
+        disp = disp.astype(np.float32) / 256.0
+        gt_disparities.append(disp)
+    return gt_disparities
+
 def compute_errors(gt, pred):
     thresh = np.maximum((gt / pred), (pred / gt))
     a1 = (thresh < 1.25).mean()

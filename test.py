@@ -105,7 +105,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
             if eval_data == "kitti_2015":
                 print("Evaluate depth at iter [" + str(itr) + "] " + eval_data)
                 gt_depths, pred_depths, gt_disparities, pred_disp_resized = load_depths(
-                    test_result_disp, gt_dir)
+                    test_result_disp, gt_dir, eval_occ=True)
                 abs_rel, sq_rel, rms, log_rms, a1, a2, a3, d1_all = eval_depth(
                     gt_depths, pred_depths, gt_disparities, pred_disp_resized)
                 sys.stderr.write(
@@ -188,7 +188,14 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 mask_err = eval_mask(test_result_mask, gt_masks, opt)
                 sys.stderr.write("mask_err is %s \n" % str(mask_err))
 
-def load_depths(gt, pred):
+def load_depths(pred_disp_org, gt_path, eval_occ):
+    gt_disparities = load_gt_disp_kitti(gt_path, eval_occ)
+    gt_depths, pred_depths, pred_disparities_resized = convert_disps_to_depths_kitti(
+        gt_disparities, pred_disp_org)
+
+    return gt_depths, pred_depths, gt_disparities, pred_disparities_resized
+
+def compute_errors(gt, pred):
     thresh = np.maximum((gt / pred), (pred / gt))
     a1 = (thresh < 1.25).mean()
     a2 = (thresh < 1.25**2).mean()

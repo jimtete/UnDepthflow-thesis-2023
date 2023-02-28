@@ -2,6 +2,7 @@ import numpy as np
 import sys
 import tensorflow as tf
 import scipy.misc as sm
+import cv2
 
 from eval.evaluate_flow import get_scaled_intrinsic_matrix, eval_flow_avg
 from eval.evaluate_mask import eval_mask

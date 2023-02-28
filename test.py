@@ -220,7 +220,7 @@ def convert_disps_to_depths_kitti(gt_disparities, pred_disparities):
 
         pred_disp = pred_disparities[i]
         pred_disp = width * cv2.resize(
-            pred_disp, (width, height), interpolation=cv2.INTER_LINEAR)
+            np.array(pred_disp), (width, height), interpolation=cv2.INTER_LINEAR)
 
         pred_disparities_resized.append(pred_disp)
 

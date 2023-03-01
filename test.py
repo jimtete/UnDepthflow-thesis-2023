@@ -295,6 +295,16 @@ def eval_depth(gt_depths,
     return abs_rel.mean(), sq_rel.mean(), rms.mean(), log_rms.mean(), a1.mean(
     ), a2.mean(), a3.mean(), d1_all.mean()
 
+def process_depth(gt_depth, pred_depth, gt_disp, min_depth, max_depth):
+    mask = gt_disp > 0
+    pred_depth[pred_depth < min_depth] = min_depth
+    pred_depth[pred_depth > max_depth] = max_depth
+    gt_depth[gt_depth < min_depth] = min_depth
+    gt_depth[gt_depth > max_depth] = max_depth
+
+    return gt_depth, pred_depth, mask
+
+
 def eval_snippet(pred_dir, gt_dir):
     pred_files = glob(pred_dir + '/*.txt')
     ate_all = []

@@ -228,7 +228,7 @@ def eval_mask(pred_masks, gt_masks, opt):
         H, W = gt_mask.shape[0:2]
 
         pred_mask = cv2.resize(
-            pred_masks[i], (W, H), interpolation=cv2.INTER_LINEAR)
+            np.array(pred_masks[i]), (W, H), interpolation=cv2.INTER_LINEAR)
 
         pred_mask[pred_mask >= 0.5] = 1.0
         pred_mask[pred_mask < 0.5] = 0.0

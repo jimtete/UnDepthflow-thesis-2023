@@ -319,7 +319,7 @@ class Model_depth(object):
         exp_mask_stack_all = []
         flyout_map_all = []
 
-        for s in range(opt.num_scales):
+        for s in range(1):
             # Scale the source and target images for computing loss at the 
             # according scale.
             curr_tgt_image = tf.image.resize_area(

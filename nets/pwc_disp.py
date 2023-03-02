@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
+from typing import Any
+
 import tensorflow as tf
 
 import tf_slim as slim
@@ -146,8 +148,8 @@ def construct_model_pwc_full_disp(feature1, feature2, image1, neg=False):
     else:
         flow6 = tf.nn.relu(flow6)
 
-    flow6to5 = tf.image.resize_bilinear(flow6,
-                                        [H / (2**5), (W / (2**5))]) * 2.0
+    flow6to5: Any = tf.image.resize_bilinear(flow6,
+                                             [int(H / (2**5)), int(W / (2 ** 5))]) * 2.0
     feature2_5w = transformer_old(feature2_5, flow6to5, [H / 32, W / 32])
     cv5 = cost_volumn(feature1_5, feature2_5w, d=4)
     flow5, _ = optical_flow_decoder_dc(

@@ -61,8 +61,9 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 imgr = sm.imread(
                     os.path.join(gt_dir, "image_3",
                                  str(i).zfill(6) + "_10.png"))
-                print(opt.img_height)
-                print(opt.img_width)
+                
+                print(i)
+
                 imgr = sm.imresize(imgr, (opt.img_height, opt.img_width))
 
                 img2r = sm.imread(

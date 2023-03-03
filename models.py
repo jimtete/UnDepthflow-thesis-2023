@@ -153,9 +153,7 @@ class Model_flow(object):
         exp_mask_stack_all = []
         flyout_map_all = []
 
-        # TODO: change num scales
-
-        for s in range(1):
+        for s in range(opt.num_scales):
             # Scale the source and target images for computing loss at the 
             # according scale.
             curr_tgt_image = tf.image.resize_area(
@@ -230,9 +228,8 @@ class Model_eval_flow(object):
                 name='raw_input_2r')
             input_intrinsic = tf.placeholder(tf.float32, [3, 3])
 
-            # TODO : NUM SCALES
-
-            cam2pix, pix2cam = get_multi_scale_intrinsics(input_intrinsic,1)
+            cam2pix, pix2cam = get_multi_scale_intrinsics(input_intrinsic,
+                                                          opt.num_scales)
             cam2pix = tf.expand_dims(cam2pix, axis=0)
             pix2cam = tf.expand_dims(pix2cam, axis=0)
 
@@ -319,8 +316,7 @@ class Model_depth(object):
         exp_mask_stack_all = []
         flyout_map_all = []
 
-        # TODO : Updated num_scales to : 1
-        for s in range(1):
+        for s in range(opt.num_scales):
             # Scale the source and target images for computing loss at the 
             # according scale.
             curr_tgt_image = tf.image.resize_area(
@@ -409,11 +405,8 @@ class Model_eval_depth(object):
                 name='raw_input_2r')
             input_intrinsic = tf.placeholder(tf.float32, [3, 3])
 
-            # TODO : changed from this :             cam2pix, pix2cam = get_multi_scale_intrinsics(input_intrinsic,
-            #                                                           opt.num_sclaes)
-            # TO THIS:
             cam2pix, pix2cam = get_multi_scale_intrinsics(input_intrinsic,
-                                                          1)
+                                                          opt.num_scales)
             cam2pix = tf.expand_dims(cam2pix, axis=0)
             pix2cam = tf.expand_dims(pix2cam, axis=0)
 
@@ -540,8 +533,7 @@ class Model_depthflow(object):
         proj_error_depth_all = []
         flyout_map_all = []
 
-        # TODO : Changed num_scales to : 1
-        for s in range(1):
+        for s in range(opt.num_scales):
             occu_mask = occu_masks[s]
             # Scale the source and target images for computing loss at the 
             # according scale.

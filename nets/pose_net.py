@@ -1,6 +1,6 @@
 from __future__ import division
 import tensorflow as tf
-import tf_slim as slim
+import tensorflow.contrib.slim as slim
 """
 Adopted from https://github.com/tinghuiz/SfMLearner
 """

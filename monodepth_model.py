@@ -16,7 +16,7 @@ from collections import namedtuple
 
 import numpy as np
 import tensorflow as tf
-import tf_slim as slim
+import tensorflow.contrib.slim as slim
 
 from nets.pwc_disp import pwc_disp
 from optical_flow_warp_old import transformer_old

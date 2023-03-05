@@ -46,6 +46,13 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 gt_dir = opt.gt_2015_dir
 
             for i in range(total_img_num):
+
+                if (total_img_num==194 and i==173):
+                    continue
+                if (total_img_num==200 and i==99):
+                    continue
+
+
                 img1 = sm.imread(
                     os.path.join(gt_dir, "image_2",
                                  str(i).zfill(6) + "_10.png"))
@@ -61,9 +68,14 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 imgr = sm.imread(
                     os.path.join(gt_dir, "image_3",
                                  str(i).zfill(6) + "_10.png"))
+<<<<<<< HEAD
                 
                 print(i)
 
+=======
+                print(os.path.join(gt_dir,"image_3",str(i).zfill(6)+"_10.png"))
+                
+>>>>>>> 61b830c (fixes)
                 imgr = sm.imresize(imgr, (opt.img_height, opt.img_width))
 
                 img2r = sm.imread(

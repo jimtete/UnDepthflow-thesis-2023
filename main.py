@@ -38,7 +38,7 @@ SAVE_INTERVAL = 2500
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string('trace', "./", 'directory for model checkpoints.')
-flags.DEFINE_integer('num_iterations', 300000,
+flags.DEFINE_integer('num_iterations', 500,
                      'number of training iterations.')
 flags.DEFINE_string('pretrained_model', '',
                     'filepath of a pretrained model to initialize from.')
@@ -57,7 +57,7 @@ flags.DEFINE_string('gt_2012_dir', '',
 flags.DEFINE_string('gt_2015_dir', '',
                     'directory of ground truth of kitti 2015')
 
-flags.DEFINE_integer('batch_size', 4, 'batch size for training')
+flags.DEFINE_integer('batch_size', 1, 'batch size for training')
 flags.DEFINE_float('learning_rate', 0.0001,
                    'the base learning rate of the generator')
 flags.DEFINE_integer('num_gpus', 1, 'the number of gpu to use')
@@ -226,7 +226,7 @@ def main(unused_argv):
 
         # Make training session.
         sess = tf.Session(config=tf.ConfigProto(
-            allow_soft_placement=True, log_device_placement=False))
+            allow_soft_placement=True, log_device_placement=True))
 
         summary_writer = tf.summary.FileWriter(
             FLAGS.trace, graph=sess.graph, flush_secs=10)

@@ -56,10 +56,12 @@ def convert_disps_to_depths_kitti(gt_disparities, pred_disparities):
     pred_disparities_resized = []
 
     for i in range(len(gt_disparities)):
+        if (i==199):
+            continue
+
         gt_disp = gt_disparities[i]
         height, width = gt_disp.shape
 
-        print(i)
         pred_disp = pred_disparities[i]
         pred_disp = width * cv2.resize(
             pred_disp, (width, height), interpolation=cv2.INTER_LINEAR)

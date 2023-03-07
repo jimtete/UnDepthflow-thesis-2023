@@ -60,6 +60,9 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 orig_H, orig_W = img1.shape[0:2]
                 img1 = sm.imresize(img1, (opt.img_height, opt.img_width))
 
+                # TODO : be fixin ay, added a print gonna destoy cpu ngl.
+                print(os.path.join(gt_dir,"image_2",str(i).zfill(6)+"_11.png"))
+
                 img2 = sm.imread(
                     os.path.join(gt_dir, "image_2",
                                  str(i).zfill(6) + "_11.png"))

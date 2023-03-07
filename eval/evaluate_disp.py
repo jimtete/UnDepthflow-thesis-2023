@@ -19,7 +19,9 @@ def eval_disp_avg(pred_disps, path, disp_num=None, moving_masks=None):
     num = len(pred_disps)
     for i, pred_disp in enumerate(pred_disps):
 
-        print(i)
+        if (i==147):
+            continue
+        
         if disp_num is not None:
             gt_disp = sm.imread(path + "/disp_occ_" + str(disp_num) + "/" +
                                 str(i).zfill(6) + "_10.png", -1)

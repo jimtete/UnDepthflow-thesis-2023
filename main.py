@@ -30,15 +30,15 @@ from test import test
 SUMMARY_INTERVAL = 100
 
 # How often to run a batch through the validation model.
-VAL_INTERVAL = 2500
+VAL_INTERVAL = 1000
 
 # How often to save a model checkpoint
-SAVE_INTERVAL = 2500
+SAVE_INTERVAL = 1000
 
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string('trace', "./", 'directory for model checkpoints.')
-flags.DEFINE_integer('num_iterations', 100000,
+flags.DEFINE_string('trace', "./Model_Logs/", 'directory for model checkpoints.')
+flags.DEFINE_integer('num_iterations', 10000,
                      'number of training iterations.')
 flags.DEFINE_string('pretrained_model', '',
                     'filepath of a pretrained model to initialize from.')

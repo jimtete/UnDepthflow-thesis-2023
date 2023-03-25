@@ -9,6 +9,7 @@ from eval.evaluate_mask import eval_mask
 from eval.evaluate_disp import eval_disp_avg
 from eval.pose_evaluation_utils import pred_pose
 from eval.eval_pose import eval_snippet, kittiEvalOdom
+from PIL import Image
 
 import re, os
 import sys
@@ -110,6 +111,8 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 test_image1.append(img1_orig)
 
                 print(pred_disp.shape)
+                im = Image.fromarray(pred_disp)
+                im.save(os.path.join('50003_',str(i).zfill(6),'_pred.jpeg'))
 
             ## depth evaluation
             if opt.eval_depth and eval_data == "kitti_2015":

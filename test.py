@@ -108,6 +108,8 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 test_result_mask.append(np.squeeze(pred_mask))
                 test_image1.append(img1_orig)
 
+                print(pred_flow_rigid)
+
             ## depth evaluation
             if opt.eval_depth and eval_data == "kitti_2015":
                 print("Evaluate depth at iter [" + str(itr) + "] " + eval_data)

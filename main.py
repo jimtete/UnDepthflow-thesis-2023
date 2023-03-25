@@ -38,7 +38,7 @@ SAVE_INTERVAL = 1000
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string('trace', "./Model_Logs/", 'directory for model checkpoints.')
-flags.DEFINE_integer('num_iterations', 10000,
+flags.DEFINE_integer('num_iterations', 50004,
                      'number of training iterations.')
 flags.DEFINE_string('pretrained_model', '',
                     'filepath of a pretrained model to initialize from.')
@@ -288,7 +288,9 @@ def main(unused_argv):
                     saver.save(
                         sess, FLAGS.trace + '/model', global_step=global_step)
 
+            print('before check')
             if (itr) % (VAL_INTERVAL) == 2 or FLAGS.train_test == "test":
+                print('after check')
                 test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012,
                      gt_flows_2015, noc_masks_2015, gt_masks)
 

@@ -20,6 +20,7 @@ opt = flags.FLAGS
 
 def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
          noc_masks_2015, gt_masks):
+    custom = 1
     print('Entered test file')
     with tf.name_scope("evaluation"):
         sys.stderr.write("Evaluation at iter [" + str(itr) + "]: \n")
@@ -54,29 +55,43 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 if (total_img_num==200 and i==99):
                     continue
 
+                if (custom == 1):
+                    img1 = sm.imread("./my_pics/000_left.jpeg")
+                    img1_orig = img1
+                    orig_H, orig_W = img1.shape[0:2]
+                    img1 = sm.imresize(img1, (opt.img_height, opt.img_width))
 
-                img1 = sm.imread(
-                    os.path.join(gt_dir, "image_2",
-                                 str(i).zfill(6) + "_10.png"))
-                img1_orig = img1
-                orig_H, orig_W = img1.shape[0:2]
-                img1 = sm.imresize(img1, (opt.img_height, opt.img_width))
+                    img2 = sm.imread("./my_pics/001_left.jpeg")
+                    img2 = sm.imresize(img2, (opt.img_height, opt.img_width))
 
-                img2 = sm.imread(
-                    os.path.join(gt_dir, "image_2",
-                                 str(i).zfill(6) + "_11.png"))
-                img2 = sm.imresize(img2, (opt.img_height, opt.img_width))
+                    imgr = sm.imread("./my_pics/000_right.jpeg")
+                    imgr = sm.imresize(imgr, (opt.img_height, opt.img_width))
 
-                imgr = sm.imread(
-                    os.path.join(gt_dir, "image_3",
-                                 str(i).zfill(6) + "_10.png"))
-           
-                imgr = sm.imresize(imgr, (opt.img_height, opt.img_width))
+                    img2r = sm.imread("./my_pics/001_right.jpeg")
+                    img2r = sm.imresize(img2r, (opt.img_height, opt.img_width))
+                else:
+                    img1 = sm.imread(
+                        os.path.join(gt_dir, "image_2",
+                                     str(i).zfill(6) + "_10.png"))
+                    img1_orig = img1
+                    orig_H, orig_W = img1.shape[0:2]
+                    img1 = sm.imresize(img1, (opt.img_height, opt.img_width))
 
-                img2r = sm.imread(
-                    os.path.join(gt_dir, "image_3",
-                                 str(i).zfill(6) + "_11.png"))
-                img2r = sm.imresize(img2r, (opt.img_height, opt.img_width))
+                    img2 = sm.imread(
+                        os.path.join(gt_dir, "image_2",
+                                     str(i).zfill(6) + "_11.png"))
+                    img2 = sm.imresize(img2, (opt.img_height, opt.img_width))
+
+                    imgr = sm.imread(
+                        os.path.join(gt_dir, "image_3",
+                                     str(i).zfill(6) + "_10.png"))
+
+                    imgr = sm.imresize(imgr, (opt.img_height, opt.img_width))
+
+                    img2r = sm.imread(
+                        os.path.join(gt_dir, "image_3",
+                                     str(i).zfill(6) + "_11.png"))
+                    img2r = sm.imresize(img2r, (opt.img_height, opt.img_width))
 
                 img1 = np.expand_dims(img1, axis=0)
                 img2 = np.expand_dims(img2, axis=0)
@@ -113,6 +128,10 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 print(pred_disp.shape)
                 im = Image.fromarray(pred_disp)
                 im.save(os.path.join('50003_',str(i).zfill(6),'_pred.jpeg'))
+
+                if (custom == 1):
+                    print("Press Ctrl + C")
+                    continue
 
             ## depth evaluation
             if opt.eval_depth and eval_data == "kitti_2015":

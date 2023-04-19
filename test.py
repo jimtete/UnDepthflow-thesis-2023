@@ -130,9 +130,9 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 # im.save("custom"+str(i)+".jpeg")
                 # im.save("original"+str(i)+".jpeg")
 
-                np.savetxt('pls_work'+str(i).zfill(6),255*np.squeeze(pred_disp),delimiter=',')
+                np.savetxt('pls_work'+str(i).zfill(6),2550*np.squeeze(pred_disp),delimiter=',')
                 print(pred_disp)
-                im = Image.fromarray(255*np.squeeze(pred_disp))
+                im = Image.fromarray(2550*np.squeeze(pred_disp))
                 im =  im.convert('RGB')
                 im.save('50003_'+str(i).zfill(6)+ '_pred.jpeg')
 

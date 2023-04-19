@@ -132,7 +132,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
 
                 print(pred_disp.shape)
                 im = Image.fromarray(255*np.squeeze(pred_disp))
-                im.save(os.path.join('50003_', str(i).zfill(6), '_pred.jpeg'))
+                im.save('50003_'+str(i).zfill(6)+ '_pred.jpeg')
 
                 if (custom == 1):
                     print("Press Ctrl + C")

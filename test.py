@@ -20,7 +20,7 @@ opt = flags.FLAGS
 
 def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
          noc_masks_2015, gt_masks):
-    custom = 1
+    custom = 0
     print('Entered test file')
     with tf.name_scope("evaluation"):
         sys.stderr.write("Evaluation at iter [" + str(itr) + "]: \n")
@@ -128,6 +128,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 im = Image.fromarray(255 * np.squeeze(pred_disp))
                 im = im.convert("RGB")
                 im.save("custom"+str(i)+".jpeg")
+                im.save("original"+str(i)+".jpeg")
 
                 if (custom == 1):
                     print("Press Ctrl + C")

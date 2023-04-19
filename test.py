@@ -125,7 +125,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 test_result_mask.append(np.squeeze(pred_mask))
                 test_image1.append(img1_orig)
 
-                im = Image.fromarray(255 * np.squeeze(pred_disp2))
+                im = Image.fromarray(255 * np.squeeze(pred_disp))
                 im = im.convert("RGB")
                 im.save("custom"+str(i)+".jpeg")
 

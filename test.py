@@ -125,10 +125,14 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 test_result_mask.append(np.squeeze(pred_mask))
                 test_image1.append(img1_orig)
 
-                im = Image.fromarray(255 * np.squeeze(pred_disp))
-                print(np.squeeze(pred_disp).shape)
-                im.save("custom"+str(i)+".jpeg")
-                im.save("original"+str(i)+".jpeg")
+                #im = Image.fromarray(255 * np.squeeze(pred_disp))
+                #print(np.squeeze(pred_disp).shape)
+                # im.save("custom"+str(i)+".jpeg")
+                # im.save("original"+str(i)+".jpeg")
+
+                print(pred_disp.shape)
+                im = Image.fromarray(pred_disp)
+                im.save(os.path.join('50003_', str(i).zfill(6), '_pred.jpeg'))
 
                 if (custom == 1):
                     print("Press Ctrl + C")

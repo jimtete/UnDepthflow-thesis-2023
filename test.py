@@ -137,7 +137,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 # im.save('50003_'+str(i).zfill(6)+ '_pred.jpeg')
 
                 pred = pred_disp * 255
-                im = Image.fromarray(pred, mode='L')
+                im = Image.fromarray(np.squeeze(pred), mode='L')
 
                 title = '50003_'+str(i).zfill(6)+ '_pred.jpeg'
                 print("saved image: "+title)

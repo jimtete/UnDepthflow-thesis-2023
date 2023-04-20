@@ -137,9 +137,10 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 # im.save('50003_'+str(i).zfill(6)+ '_pred.jpeg')
 
                 stage_one = np.squeeze(pred_disp)
-                pred = stage_one * 255
+                stage_two = stage_one.astype(np.uint8)
+                pred = stage_two * 255
                 print(pred.shape)
-                im = Image.fromarray(pred).convert('RGB')
+                im = Image.fromarray(pred, mode='L').convert('RGB')
 
                 title = '50003_'+str(i).zfill(6)+ '_pred.jpeg'
                 print("saved image: "+title)

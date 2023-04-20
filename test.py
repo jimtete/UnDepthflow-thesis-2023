@@ -140,7 +140,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 stage_two = stage_one * 255
                 max = np.max(stage_two)
                 stage_three = stage_two * (255/max)
-                pred = stage_two.astype(np.uint8)
+                pred = stage_three.astype(np.uint8)
                 print(pred.shape)
                 im = Image.fromarray(pred, mode='L').convert('RGB')
 

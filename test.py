@@ -136,13 +136,21 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 # im =  im.convert('RGB')
                 # im.save('50003_'+str(i).zfill(6)+ '_pred.jpeg')
 
-                stage_one = np.squeeze(pred_disp)
+                image_to_print = 1 # 1 for original, 2 for depth pred.
+                if (image_to_print == 1):
+                    stage_zero = img1_orig
+                    mode_img = 'RGB'
+                else:
+                    stage_zero = pred_disp
+                    mode_img = 'L'
+
+                stage_one = np.squeeze(img1_orig)
                 stage_two = stage_one * 255
                 max = np.max(stage_two)
                 stage_three = stage_two * (255/max)
                 pred = stage_three.astype(np.uint8)
                 print(pred.shape)
-                im = Image.fromarray(pred, mode='L').convert('RGB')
+                im = Image.fromarray(pred, mode=mode_img).convert('RGB')
 
                 if eval_data == "kitti_2012":
                     title = 'kitti_2012_50003_'+str(i).zfill(6)+ '_pred.jpeg'

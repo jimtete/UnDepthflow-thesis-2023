@@ -20,7 +20,7 @@ opt = flags.FLAGS
 
 def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
          noc_masks_2015, gt_masks):
-    custom = 0
+    custom = 1
     print('Entered test file')
     with tf.name_scope("evaluation"):
         sys.stderr.write("Evaluation at iter [" + str(itr) + "]: \n")
@@ -136,7 +136,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 # im =  im.convert('RGB')
                 # im.save('50003_'+str(i).zfill(6)+ '_pred.jpeg')
 
-                image_to_print = 1 # 1 for original, 2 for depth pred.
+                image_to_print = 2 # 1 for original, 2 for depth pred.
                 if (image_to_print == 1):
                     pred = img1_orig
                     mode_img = 'RGB'

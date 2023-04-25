@@ -56,7 +56,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                     continue
 
                 if (custom == 1):
-                    img1 = sm.imread("./my_pics/000_left.jpeg")
+                    img1 = sm.imread("./my_pics2/000_left.jpeg")
                     img1_orig = img1
                     orig_H, orig_W = img1.shape[0:2]
                     img1 = sm.imresize(img1, (opt.img_height, opt.img_width))

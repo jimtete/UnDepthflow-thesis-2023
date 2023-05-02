@@ -38,7 +38,7 @@ SAVE_INTERVAL = 1000
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string('trace', "./Model_Logs/", 'directory for model checkpoints.')
-flags.DEFINE_integer('num_iterations', 50004,
+flags.DEFINE_integer('num_iterations', 65004,
                      'number of training iterations.')
 flags.DEFINE_string('pretrained_model', '',
                     'filepath of a pretrained model to initialize from.')

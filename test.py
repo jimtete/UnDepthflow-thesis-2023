@@ -5,6 +5,7 @@ import scipy.misc as sm
 from eval.evaluate_depth import load_depths, eval_depth
 from eval.evaluate_flow import get_scaled_intrinsic_matrix, eval_flow_avg
 from eval.evaluate_mask import eval_mask
+from enum import Enum
 
 from eval.evaluate_disp import eval_disp_avg
 from eval.pose_evaluation_utils import pred_pose
@@ -17,7 +18,7 @@ import sys
 from tensorflow.python.platform import flags
 opt = flags.FLAGS
 
-class model_type(enum):
+class model_type(Enum):
     hitnet = -1
     undepthflow = -2
 

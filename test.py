@@ -185,7 +185,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                     img = Image.open(img_path).resize((opt.img_height, opt.img_width))
                     img = img.convert('L')
                     image_array = np.array(img).astype(np.float32)
-                    numpy_image = image_array / 1.0
+                    numpy_image = image_array / 256.0
 
                     test_result_disp.append(np.squeeze(numpy_image))
 

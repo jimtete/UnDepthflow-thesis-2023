@@ -183,7 +183,9 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 if (model == model_type.hitnet):
                     img_path = "predictions/hitnet/training/"+eval_kitti_year+"/"+str(i).zfill(6) + ".png"
                     img = sm.imread(img_path)
-                    print(np.array(img).shape)
+                    img = sm.imresize(img, (opt.img_height, opt.img_width))
+                    numpy_image = np.array(img)
+                    print(numpy_image.shape)
 
 
                 # Check np shape

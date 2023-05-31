@@ -60,9 +60,9 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
 
             for i in range(total_img_num):
 
-                if (total_img_num==194 and i==173):
+                if (model == model_type.undepthflow and total_img_num==194 and i==173):
                     continue
-                if (total_img_num==200 and i==99):
+                if (model == model_type.undepthflow and total_img_num==200 and i==99):
                     continue
 
                 if (model == model_type.undepthflow):
@@ -184,15 +184,9 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                     img_path = "predictions/hitnet/training/"+eval_kitti_year+"/"+str(i).zfill(6) + ".png"
                     img = Image.open(img_path).resize((opt.img_height, opt.img_width))
                     img = img.convert('L')
-                    numpy_image = np.array(img)
-                    print(numpy_image.shape)
-                    print(np.amax(numpy_image, axis=None))
+                    numpy_image = np.array(img)/255
 
-
-
-                # Check np shape
-                # Check array values
-
+                    test_result_disp.append(numpy_image)
 
 
 
@@ -234,7 +228,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 sys.stderr.write(disp_err + "\n")
 
             # flow evaluation
-            if opt.eval_flow and eval_data == "kitti_2012":
+            if model == model_type.undepthflow and opt.eval_flow and eval_data == "kitti_2012":
                 if opt.mode in ["depth", "depthflow"]:
                     epe = eval_flow_avg(gt_flows_2012, noc_masks_2012,
                                         test_result_flow_rigid, opt)
@@ -246,7 +240,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 sys.stderr.write("epe 2012 optical is \n")
                 sys.stderr.write(epe + "\n")
 
-            if opt.eval_flow and eval_data == "kitti_2015":
+            if model == model_type.undepthflow and opt.eval_flow and eval_data == "kitti_2015":
                 if opt.mode in ["depth", "depthflow"]:
                     epe = eval_flow_avg(
                         gt_flows_2015,
@@ -267,6 +261,6 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 sys.stderr.write(epe + "\n")
 
             # mask evaluation
-            if opt.eval_mask and eval_data == "kitti_2015":
+            if model == model_type.undepthflow and  opt.eval_mask and eval_data == "kitti_2015":
                 mask_err = eval_mask(test_result_mask, gt_masks, opt)
                 sys.stderr.write("mask_err is %s \n" % str(mask_err))

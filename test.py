@@ -184,9 +184,10 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                     img_path = "predictions/hitnet/training/"+eval_kitti_year+"/"+str(i).zfill(6) + ".png"
                     img = Image.open(img_path).resize((opt.img_height, opt.img_width))
                     img = img.convert('L')
-                    numpy_image = np.array(img)/255
+                    numpy_image = (np.array(img).astype(np.float32)/255)
 
                     test_result_disp.append(numpy_image)
+                    print(len(test_result_disp))
 
 
 

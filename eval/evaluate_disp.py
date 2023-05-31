@@ -36,8 +36,6 @@ def eval_disp_avg(pred_disps, path, disp_num=None, moving_masks=None):
         gt_disp = gt_disp.astype(np.float32) / 256.0
         gt_disp_noc = gt_disp_noc.astype(np.float32) / 256.0
 
-        print(np.amax(gt_disp, axis=None))
-
         noc_mask = (gt_disp_noc > 0.0).astype(np.float32)
         valid_mask = (gt_disp > 0.0).astype(np.float32)
 

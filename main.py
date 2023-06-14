@@ -235,8 +235,8 @@ def main(unused_argv):
         sess.run(tf.local_variables_initializer())
         if FLAGS.pretrained_model:
             if FLAGS.train_test == "test" or (not FLAGS.retrain):
-                print("SUCCESSFULLY LOADING MODEL : "+ str(FLAGS.pretrained_model))
                 saver.restore(sess, FLAGS.pretrained_model)
+                print("SUCCESSFULLY LOADING MODEL : "+ str(FLAGS.pretrained_model))
             elif FLAGS.mode == "depthflow":
                 saver_rest = tf.train.Saver(
                     list(

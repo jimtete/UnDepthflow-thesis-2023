@@ -13,6 +13,7 @@
 # ==============================================================================
 
 import tensorflow as tf
+import gc
 
 from tensorflow.python.platform import app
 from tensorflow.python.platform import flags
@@ -80,6 +81,7 @@ opt = FLAGS
 
 
 def main(unused_argv):
+    gc.enable()
     if FLAGS.trace == "":
         raise Exception("OUT_DIR must be specified")
 
@@ -237,6 +239,7 @@ def main(unused_argv):
             if FLAGS.train_test == "test" or (not FLAGS.retrain):
                 saver.restore(sess, FLAGS.pretrained_model)
                 print("SUCCESSFULLY LOADING MODEL : "+ str(FLAGS.pretrained_model))
+                gc.collect()
             elif FLAGS.mode == "depthflow":
                 saver_rest = tf.train.Saver(
                     list(

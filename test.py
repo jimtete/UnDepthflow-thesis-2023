@@ -129,16 +129,15 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                                                                            eval_model.input_2r:img2r,
                                                                            eval_model.input_intrinsic: input_intrinsic})
 
-                    # im = Image.fromarray(255 * np.squeeze(pred_disp))
-                    # print(np.squeeze(pred_disp).shape)
-                    # im.save("custom"+str(i)+".jpeg")
-                    # im.save("original"+str(i)+".jpeg")
+                    im = Image.fromarray(255 * np.squeeze(pred_disp))
+                    print(np.squeeze(pred_disp).shape)
+                    im.save("custom"+str(i)+".jpeg")
+                    im.save("original"+str(i)+".jpeg")
 
-                    # np.savetxt('pls_work'+str(i).zfill(6),2550*np.squeeze(pred_disp),delimiter=',')
-                    # print(pred_disp)
-                    # im = Image.fromarray(255*np.squeeze(pred_disp))
-                    # im =  im.convert('RGB')
-                    # im.save('50003_'+str(i).zfill(6)+ '_pred.jpeg')
+                    print(pred_disp)
+                    im = Image.fromarray(255*np.squeeze(pred_disp))
+                    im =  im.convert('RGB')
+                    im.save('50003_'+str(i).zfill(6)+ '_pred.jpeg')
 
                     # TODO: CHECK HERE
                     # That's for printing the image

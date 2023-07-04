@@ -135,37 +135,37 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                     # im.save("original"+str(i)+".jpeg")
 
                     # print(pred_disp)
-                    im = Image.fromarray(255*np.squeeze(pred_disp))
-                    im =  im.convert('RGB')
-                    im.save('50003_'+str(i).zfill(6)+ '_pred.jpeg')
+                    # im = Image.fromarray(255*np.squeeze(pred_disp))
+                    # im =  im.convert('RGB')
+                    # im.save('50003_'+str(i).zfill(6)+ '_pred.jpeg')
 
                     # TODO: CHECK HERE
                     # That's for printing the image
 
-                    # image_to_print = 2  # 1 for original, 2 for depth pred.
-                    # if (image_to_print == 1):
-                    #     pred = img1_orig
-                    #     mode_img = 'RGB'
-                    # else:
-                    #     stage_zero = pred_disp
-                    #     mode_img = 'L'
-                    #     stage_one = np.squeeze(stage_zero)
-                    #     stage_two = stage_one * 255
-                    #     max = np.max(stage_two)
-                    #     stage_three = stage_two * (255 / max)
-                    #     pred = stage_three.astype(np.uint8)
-                    #
-                    # print(pred.shape)
-                    # im = Image.fromarray(pred, mode=mode_img).convert('RGB')
-                    #
-                    # if eval_data == "kitti_2012":
-                    #     title = 'kitti_2012_65003_' + str(i).zfill(6) + '_pred.jpeg'
-                    # else:
-                    #     title = 'kitti_2015_65003_' + str(i).zfill(6) + '_pred.jpeg'
-                    #
-                    # print("saved image: " + title)
-                    # im.save(title)
-                    #
+                    image_to_print = 2  # 1 for original, 2 for depth pred.
+                    if (image_to_print == 1):
+                        pred = img1_orig
+                        mode_img = 'RGB'
+                    else:
+                        stage_zero = pred_disp
+                        mode_img = 'L'
+                        stage_one = np.squeeze(stage_zero)
+                        stage_two = stage_one * 255
+                        max = np.max(stage_two)
+                        stage_three = stage_two * (255 / max)
+                        pred = stage_three.astype(np.uint8)
+
+                    print(pred.shape)
+                    im = Image.fromarray(pred, mode=mode_img).convert('RGB')
+
+                    if eval_data == "kitti_2012":
+                        title = 'kitti_2012_65003_' + str(i).zfill(6) + '_pred.jpeg'
+                    else:
+                        title = 'kitti_2015_65003_' + str(i).zfill(6) + '_pred.jpeg'
+
+                    print("saved image: " + title)
+                    im.save(title)
+
                     # if (custom == 1):
                     #     print("Press Ctrl + C")
                     #     continue

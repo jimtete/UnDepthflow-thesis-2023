@@ -171,9 +171,9 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                     im = Image.fromarray(pred, mode=mode_img).convert('RGB')
 
                     if eval_data == "kitti_2012":
-                        title = 'kitti_2012_75003_' + str(i).zfill(6) + '_pred.jpeg'
+                        title = 'kitti_2012_65003_' + str(i).zfill(6) + '_pred.jpeg'
                     else:
-                        title = 'kitti_2015_75003_' + str(i).zfill(6) + '_pred.jpeg'
+                        title = 'kitti_2015_65003_' + str(i).zfill(6) + '_pred.jpeg'
 
                     print("saved image: " + title)
                     im.save(title)

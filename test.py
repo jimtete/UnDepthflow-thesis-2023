@@ -203,6 +203,8 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
 
                     test_result_disp.append(np.squeeze(numpy_image))
 
+            if (data_type == train_test.test):
+                continue
 
             ## depth evaluation
             if opt.eval_depth and eval_data == "kitti_2015":

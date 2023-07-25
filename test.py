@@ -22,6 +22,10 @@ class model_type(Enum):
     hitnet = -1
     undepthflow = -2
 
+class train_test(Enum):
+    train = -202
+    test = -205
+
 
 def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
          noc_masks_2015, gt_masks):
@@ -29,6 +33,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
     # Setup evaluation pipeline.
     custom = 0
     model = model_type.undepthflow
+    data_type = train_test.test
 
 
     print('Entered test file')
@@ -109,8 +114,15 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                     imgr = np.expand_dims(imgr, axis=0)
                     img2r = np.expand_dims(img2r, axis=0)
 
-                    calib_file = os.path.join(gt_dir, "calib_cam_to_cam",
-                                              str(i).zfill(6) + ".txt")
+                    if (data_type == train_test.train):
+                        calib_file = os.path.join(gt_dir, "calib_cam_to_cam",
+                                                  str(i).zfill(6) + ".txt")
+
+                    if (data_type == train_test.test):
+                        calib_file = os.path.join(gt_dir, "calib",
+                                                  str(i).zfill(6) + ".txt")
+
+
 
                     input_intrinsic = get_scaled_intrinsic_matrix(
                         calib_file,

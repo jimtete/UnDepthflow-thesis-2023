@@ -33,7 +33,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
     # Setup evaluation pipeline.
     custom = 0
     model = model_type.undepthflow
-    data_type = train_test.test
+    data_type = train_test.train
 
 
     print('Entered test file')
@@ -175,8 +175,8 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                     else:
                         title = 'kitti_2015_10003_' + str(i).zfill(6) + '_pred.jpeg'
 
-                    print("saved image: " + title)
-                    im.save(title)
+                    # print("saved image: " + title)
+                    # im.save(title)
 
                     # if (custom == 1):
                     #     print("Press Ctrl + C")

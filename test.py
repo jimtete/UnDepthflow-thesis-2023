@@ -67,6 +67,11 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
 
             for i in range(total_img_num):
 
+                if (model == model_type.undepthflow and total_img_num==194 and i==173):
+                    continue
+                if (model == model_type.undepthflow and total_img_num==200 and i==99):
+                    continue
+
                 if (model == model_type.undepthflow):
                     if (custom == 1):
                         img1 = sm.imread("./my_pics2/000_left.jpeg")
@@ -202,8 +207,6 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
             if (data_type == train_test.test):
                 continue
 
-            print("evaluation starts")
-
             ## depth evaluation
             if opt.eval_depth and eval_data == "kitti_2015":
                 print("Evaluate depth at iter [" + str(itr) + "] " + eval_data)
@@ -211,6 +214,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                     test_result_disp, gt_dir, eval_occ=True)
 
                 # save depth predictions
+                print("evaluations start")
 
                 i = 0
 

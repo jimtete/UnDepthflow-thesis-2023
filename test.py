@@ -63,12 +63,9 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 total_img_num = 200
                 gt_dir = opt.gt_2015_dir
 
-            for i in range(total_img_num):
+            print("predictions start")
 
-                if (model == model_type.undepthflow and total_img_num==194 and i==173):
-                    continue
-                if (model == model_type.undepthflow and total_img_num==200 and i==99):
-                    continue
+            for i in range(total_img_num):
 
                 if (model == model_type.undepthflow):
                     if (custom == 1):
@@ -204,6 +201,8 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
 
             if (data_type == train_test.test):
                 continue
+
+            print("evaluation starts")
 
             ## depth evaluation
             if opt.eval_depth and eval_data == "kitti_2015":

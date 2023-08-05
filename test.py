@@ -152,28 +152,27 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                     # im.save('50003_'+str(i).zfill(6)+ '_pred.jpeg')
 
                     # TODO: CHECK HERE
-                    # That's for printing the image
 
-                    image_to_print = 2  # 1 for original, 2 for depth pred.
-                    if (image_to_print == 1):
-                        pred = img1_orig
-                        mode_img = 'RGB'
-                    else:
-                        stage_zero = pred_disp
-                        mode_img = 'L'
-                        stage_one = np.squeeze(stage_zero)
-                        stage_two = stage_one * 255
-                        max = np.max(stage_two)
-                        stage_three = stage_two * (255 / max)
-                        pred = stage_three.astype(np.uint8)
+                    # image_to_print = 2  # 1 for original, 2 for depth pred.
+                    # if (image_to_print == 1):
+                    #     pred = img1_orig
+                    #     mode_img = 'RGB'
+                    # else:
+                    #     stage_zero = pred_disp
+                    #     mode_img = 'L'
+                    #     stage_one = np.squeeze(stage_zero)
+                    #     stage_two = stage_one * 255
+                    #     max = np.max(stage_two)
+                    #     stage_three = stage_two * (255 / max)
+                    #     pred = stage_three.astype(np.uint8)
+                    #
+                    # print(pred.shape)
+                    # im = Image.fromarray(pred, mode=mode_img).convert('RGB')
 
-                    print(pred.shape)
-                    im = Image.fromarray(pred, mode=mode_img).convert('RGB')
-
-                    if eval_data == "kitti_2012":
-                        title = 'kitti_2012_10003_' + str(i).zfill(6) + '_pred.jpeg'
-                    else:
-                        title = 'kitti_2015_10003_' + str(i).zfill(6) + '_pred.jpeg'
+                    # if eval_data == "kitti_2012":
+                    #     title = 'kitti_2012_10003_' + str(i).zfill(6) + '_pred.jpeg'
+                    # else:
+                    #     title = 'kitti_2015_10003_' + str(i).zfill(6) + '_pred.jpeg'
 
                     # print("saved image: " + title)
                     # im.save(title)
@@ -211,6 +210,17 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 print("Evaluate depth at iter [" + str(itr) + "] " + eval_data)
                 gt_depths, pred_depths, gt_disparities, pred_disp_resized = load_depths(
                     test_result_disp, gt_dir, eval_occ=True)
+
+                # save depth predictions
+
+                i = 0
+
+                for single_pred in range(pred_depths):
+                    im = Image.fromarray(single_pred, mode=mode_img).convert('RGB')
+                    title = 'kitti_2015_75003_' + str(i).zfill(6) + '_pred.jpeg'
+                    im.save(title)
+                    i = i + 1
+
                 abs_rel, sq_rel, rms, log_rms, a1, a2, a3, d1_all = eval_depth(
                     gt_depths, pred_depths, gt_disparities, pred_disp_resized)
                 sys.stderr.write(

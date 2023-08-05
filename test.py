@@ -52,7 +52,8 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                     os.path.join("./pose_gt_data/", seq_no))
             odom_eval.eval(opt.trace + "/pred_poses/")
             sys.stderr.write("pose_prediction_finished \n")
-        for eval_data in ["kitti_2012", "kitti_2015"]:
+        #for eval_data in ["kitti_2012", "kitti_2015"]:
+        for eval_data in ["kitti_2015"]:
             test_result_disp, test_result_flow_rigid, test_result_flow_optical, \
             test_result_mask, test_result_disp2, test_image1 = [], [], [], [], [], []
 
@@ -218,7 +219,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
 
                 i = 0
 
-                for single_pred in range(pred_depths):
+                for single_pred in pred_depths:
                     im = Image.fromarray(single_pred, mode=mode_img).convert('RGB')
                     title = 'kitti_2015_75003_' + str(i).zfill(6) + '_pred.jpeg'
                     im.save(title)

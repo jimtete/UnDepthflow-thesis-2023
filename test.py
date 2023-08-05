@@ -220,7 +220,7 @@ def test(sess, eval_model, itr, gt_flows_2012, noc_masks_2012, gt_flows_2015,
                 i = 0
 
                 for single_pred in pred_depths:
-                    im = Image.fromarray(single_pred, mode=mode_img).convert('RGB')
+                    im = Image.fromarray(single_pred, mode='L').convert('RGB')
                     title = 'kitti_2015_75003_' + str(i).zfill(6) + '_pred.jpeg'
                     im.save(title)
                     i = i + 1
